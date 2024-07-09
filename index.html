@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Vibration Project</title>
+</head>
+<body>
+  <h1>Interactive Vibration Project</h1>
+  <button id="myButton1">Vibrate My Phone</button>
+  <button id="myButton2">Vibrate Your Phone</button>
+  
+  <script>
+    // Add event listeners to both buttons
+    document.getElementById("myButton1").addEventListener("click", function() {
+      // Vibrate your phone
+      navigator.vibrate(500);
+    });
+    
+    document.getElementById("myButton2").addEventListener("click", function() {
+      // Vibrate your girlfriend's phone
+      sendVibrationRequest();
+    });
+    
+    // Function to send a vibration request to your server
+    function sendVibrationRequest() {
+      // Make an AJAX request to your server with the vibration request
+      fetch("http://localhost:3000/vibrate")
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            console.log("Vibration request sent successfully");
+          } else {
+            console.error("Failed to send vibration request");
+          }
+        })
+        .catch(error => {
+          console.error("Error sending vibration request:", error);
+        });
+    }
+  </script>
+</body>
+</html>
